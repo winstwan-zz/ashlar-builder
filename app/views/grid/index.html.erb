@@ -1,0 +1,8 @@
+<% w = @g.width %>
+<% h = @g.height %>
+
+<div style="min-width:<%=106*w+8%>px; min-height:<%=106*h+8%>px; background-color:#ccc; position:absolute;">
+    <% @tiles.each do |t| %>
+       <%= render partial: "tile/grid_tile", locals: {tile: t} %> 
+    <% end %>
+</div>
