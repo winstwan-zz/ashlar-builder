@@ -6,12 +6,16 @@ class Grid
     EMPTY         = 'o'
     OUT_OF_BOUNDS = '-'
 
-    def initialize(x,y)
-        @width = x 
-        @height = y
+    def initialize(width, height)
+        @width = width 
+        @height = height
 
         # a 2d array of EMPTY, defined above
         @g = Array.new(@width) { Array.new(@height, EMPTY) }
+
+        # a 2d array of vertices
+        # TODO replace with grid of vertices
+        @v = Array.new(@width + 1) { Array.new(@height + 1) { GridVertex.new } }
     end
 
     def set(x,y,state)
@@ -52,6 +56,20 @@ class Grid
             end
         end
         true
+    end
+
+    # find the next empty location left-to-right, top-to-bottom
+    # TODO slow. save this value as items are added
+    def next_unmarked_location
+      height.times do |j|
+        width.times do |i|
+          return i,j if get(i,j) == EMPTY
+        end
+      end
+    end
+
+    def get_vertices
+      @v
     end
 
     def to_s
