@@ -5,6 +5,10 @@ class AshlarGrid < TileGrid
     super(x,y)
   end
 
+  # MAIN RECURSIVE FUNCTION
+  # this is where all the baby-making happens
+  # implements a basic depth first search
+  # starting from top left to bottom right
   def fill
     i,j = self.next_unmarked_location
     # see if we are done
@@ -20,7 +24,8 @@ class AshlarGrid < TileGrid
         self.place_tile(t,i,j)
 
         # how are we doing?
-        score = AshlarEvaluator.eval(self)
+        # TODO ewww hardcoded integers.  max allowable edge length
+        score = AshlarEvaluator.eval(self, 3)
         if score < 1
           # keep going
           done = self.fill

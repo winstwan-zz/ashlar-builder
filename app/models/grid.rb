@@ -47,10 +47,11 @@ class Grid
         @g[x][y]
     end
 
-    def empty_area?(x,y,width = 1, height = 1)
+    def empty_area?(x,y,width = 1, height = 1, state = EMPTY)
         width.times do |i|
             height.times do |j|
-                if self.get(x+i,y+j) != EMPTY
+                # compare location value against the state to check for
+                if self.get(x+i,y+j) != state
                     return false
                 end
             end
